@@ -1,0 +1,14 @@
+{
+    "name": "photobank/elastic-bridge",
+    "require": {
+        "elasticsearch/elasticsearch": "^2.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "barantaran",
+            "email": "yourchev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
