@@ -5,7 +5,7 @@ $hosts = [
 //	'172.17.0.2:9200',          // IP + Port
 ];
 
-if(!isset $hosts || count($hosts) < 1) die ("No hosts listed!");
+if(!isset($hosts) || count($hosts) < 1) die ("No hosts listed in \$hosts array!\n");
 
 $client = Elasticsearch\ClientBuilder::create()
 	->setHosts($hosts)
