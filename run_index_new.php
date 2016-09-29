@@ -12,7 +12,7 @@ $client = Elasticsearch\ClientBuilder::create()
 	->setHosts($hosts)
 	->build();
 
-$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND indexed = 0";
+$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = 0";
 
 $source = getSource($sql);
 $index = "movies";
