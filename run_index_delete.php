@@ -15,7 +15,8 @@ $client = Elasticsearch\ClientBuilder::create()
 /* 0 - waiting for index */
 /* 1 - indexed, active */
 /* 2 - waiting for removal */
-/* 3 - removed, not active */
+/* 3 - waiting for reindex */
+/* 4 - removed, not active */
 
 $sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = 2";
 
@@ -35,7 +36,7 @@ foreach($source as $one)
   $response = $client->delete($params);
 
   if($response){
-    $sql = "UPDATE file SET ext_index_status = 3 WHERE id = " . $one['file_id'];
+    $sql = "UPDATE file SET ext_index_status = 4 WHERE id = " . $one['file_id'];
     $db->query($sql);
   }
 }
