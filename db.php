@@ -2,7 +2,7 @@
 
 $dsn = 'mysql:dbname=photobank;host=172.17.0.2;charset=utf8';
 $user = 'photobank_user';
-$password = 'VfrcGkfyr1MS';
+$password = '';
 
 try {
     $dbh = new PDO($dsn, $user, $password);
