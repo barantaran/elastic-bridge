@@ -45,8 +45,6 @@ $desiredFields = [
 
 foreach($source as $one)
 {
-  echo "\n__ONE__\n";
-  print_r($one);
   $body = json_decode($one["raw_data"],1);
 
   foreach($desiredFields as $field){
