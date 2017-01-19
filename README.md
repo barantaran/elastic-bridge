@@ -17,5 +17,5 @@ docker exec -i -t elastic-bridge /bin/bash
 
 Run bridge:
 ```
-php run.php
+php run_index_all.php
 ```
