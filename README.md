@@ -12,7 +12,7 @@ $ docker run -d -p 80:80 --link elasticsearch --link photobank-db --name elastic
 
 Enter container:
 ```
-sudo docker exec -i -t elastic-bridge /bin/bash
+docker exec -i -t elastic-bridge /bin/bash
 ```
 
 Run bridge:
