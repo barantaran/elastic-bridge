@@ -2,6 +2,21 @@
 require 'vendor/autoload.php';
 require 'db.php';
 
+
+function checkLongererSide($w, $h){
+	if ($w > $h){
+		if($w < 1500 ){
+			return true;
+		}
+	}
+	else{
+		if($h < 1500 ){
+			return true;
+		}
+	}
+	return false;
+}
+
 $hosts = [
 	'195.26.178.77:9200',          // IP + Port
 ];
@@ -50,7 +65,7 @@ foreach($source as $one)
   echo "\n__ONE__\n";
   print_r($one);
   $body = json_decode($one["raw_data"],1);
-
+	$bodyFiltered = array();
   foreach($desiredFields as $field){
     if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
   }
@@ -66,6 +81,22 @@ foreach($source as $one)
   echo "\n__BODYFILTERED__\n";
   $bodyFiltered["imdbId"] = $fileSource["shortUrl"];
   $bodyFiltered["plot"] = $fileSource["originalFilename"];
+
+	if($one["width"] > $one["height"] ){
+		$bodyFiltered["horizontal"] = 1;
+	}
+	else{
+		$bodyFiltered["horizontal"] = 0;
+	}
+
+	$sideCheck = checkLongererSide($one["width"], $one["height"]);
+	if ($sideCheck == true){
+		$bodyFiltered["sizetype"] = 1;
+	}
+	else{
+		$bodyFiltered["sizetype"] = 2;
+	}
+
   print_r($bodyFiltered);
 
   $params = [
