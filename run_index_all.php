@@ -2,21 +2,6 @@
 require 'vendor/autoload.php';
 require 'db.php';
 
-
-function checkLongererSide($w, $h){
-	if ($w > $h){
-		if($w < 1500 ){
-			return true;
-		}
-	}
-	else{
-		if($h < 1500 ){
-			return true;
-		}
-	}
-	return false;
-}
-
 $hosts = [
 	'195.26.178.77:9200',          // IP + Port
 ];
@@ -52,8 +37,8 @@ $desiredFields = [
 //"Source",
 //"Description",
 "Title",
-"ExifImageLength",
-"ExifImageWidth",
+//"ExifImageLength",
+//"ExifImageWidth",
 //"ImageWidth",
 //"ImageLength"
 ];
@@ -81,6 +66,9 @@ foreach($source as $one)
   echo "\n__BODYFILTERED__\n";
   $bodyFiltered["imdbId"] = $fileSource["shortUrl"];
   $bodyFiltered["plot"] = $fileSource["originalFilename"];
+	$bodyFiltered["exifimagelength"] = $one["height"];
+	$bodyFiltered["exifimagewidth"] = $one["width"];
+	$bodyFiltered["date_taken"] = date("d/m/Y", strtotime($one["date_taken"]));
 
 	if($one["width"] > $one["height"] ){
 		$bodyFiltered["horizontal"] = 1;
@@ -89,12 +77,11 @@ foreach($source as $one)
 		$bodyFiltered["horizontal"] = 0;
 	}
 
-	$sideCheck = checkLongererSide($one["width"], $one["height"]);
-	if ($sideCheck == true){
-		$bodyFiltered["sizetype"] = 1;
+	if ($one["width"] > $one["height"]){
+		$bodyFiltered["sizetype"] = $one["width"];
 	}
 	else{
-		$bodyFiltered["sizetype"] = 2;
+		$bodyFiltered["sizetype"] = $one["height"];
 	}
 
   print_r($bodyFiltered);
