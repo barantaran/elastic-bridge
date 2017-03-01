@@ -62,7 +62,7 @@ foreach($source as $one)
   $fileSource = getSource($sql)->fetch();
   echo "\n__FILESOURCE__\n";
   print_r($fileSource);
-  $bodyFiltered["poster"] = "https://photo.mir24.tv/core/cache/plugins/imageviewer/".$fileSource['id']."/".$fileSource['unique_hash']."/280x280_middle.jpg";
+  $bodyFiltered["poster"] = "https://photo.mir24.tv/core/cache/plugins/imageviewer/".$fileSource['id']."/".$fileSource['unique_hash']."/585x440_cropped.jpg";
   echo "\n__BODYFILTERED__\n";
   $bodyFiltered["imdbId"] = $fileSource["shortUrl"];
   $bodyFiltered["plot"] = $fileSource["originalFilename"];
