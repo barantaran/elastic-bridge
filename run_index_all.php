@@ -72,15 +72,10 @@ foreach($source as $one)
 
 	if($one["width"] > $one["height"] ){
 		$bodyFiltered["horizontal"] = 1;
-	}
-	else{
-		$bodyFiltered["horizontal"] = 0;
-	}
-
-	if ($one["width"] > $one["height"]){
 		$bodyFiltered["sizetype"] = $one["width"];
 	}
 	else{
+		$bodyFiltered["horizontal"] = 0;
 		$bodyFiltered["sizetype"] = $one["height"];
 	}
 
