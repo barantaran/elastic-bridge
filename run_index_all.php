@@ -37,8 +37,8 @@ $desiredFields = [
 //"Source",
 //"Description",
 "Title",
-"ExifImageLength",
-"ExifImageWidth",
+//"ExifImageLength",
+//"ExifImageWidth",
 //"ImageWidth",
 //"ImageLength"
 ];
@@ -50,7 +50,7 @@ foreach($source as $one)
   echo "\n__ONE__\n";
   print_r($one);
   $body = json_decode($one["raw_data"],1);
-
+	$bodyFiltered = array();
   foreach($desiredFields as $field){
     if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
   }
@@ -62,10 +62,23 @@ foreach($source as $one)
   $fileSource = getSource($sql)->fetch();
   echo "\n__FILESOURCE__\n";
   print_r($fileSource);
-  $bodyFiltered["poster"] = "https://photo.mir24.tv/core/cache/plugins/imageviewer/".$fileSource['id']."/".$fileSource['unique_hash']."/280x280_middle.jpg";
+  $bodyFiltered["poster"] = "https://photo.mir24.tv/core/cache/plugins/imageviewer/".$fileSource['id']."/".$fileSource['unique_hash']."/585x440_cropped.jpg";
   echo "\n__BODYFILTERED__\n";
   $bodyFiltered["imdbId"] = $fileSource["shortUrl"];
   $bodyFiltered["plot"] = $fileSource["originalFilename"];
+	$bodyFiltered["exifimagelength"] = $one["height"];
+	$bodyFiltered["exifimagewidth"] = $one["width"];
+	$bodyFiltered["date_taken"] = date("d/m/Y", strtotime($one["date_taken"]));
+
+	if($one["width"] > $one["height"] ){
+		$bodyFiltered["horizontal"] = 1;
+		$bodyFiltered["sizetype"] = $one["width"];
+	}
+	else{
+		$bodyFiltered["horizontal"] = 0;
+		$bodyFiltered["sizetype"] = $one["height"];
+	}
+
   print_r($bodyFiltered);
 
   $params = [
