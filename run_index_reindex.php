@@ -12,12 +12,10 @@ $log->debug('Reindex started');
 
 $conf = Config::load('config.yml');
 
-$hosts = [
-	$conf["host"] . ":" . $conf["port"] // IP + Port
-];
-
 $client = Elasticsearch\ClientBuilder::create()
-	->setHosts($hosts)
+    ->setHosts([
+        $conf["host"] . ":" . $conf["port"] // IP + Port
+    ])
 	->build();
 
 /* 0 - waiting for index */
