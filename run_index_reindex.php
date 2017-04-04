@@ -29,14 +29,13 @@ $client = Elasticsearch\ClientBuilder::create()
 $sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = 3";
 
 $source = getSource($sql);
-$index = "movies";
 
 foreach($source as $one)
 {
   $body = json_decode($one["raw_data"],1);
 
   $params = [
-    'index' => $index,
+    'index' => $conf["index"],
     'type' => 'image',
     'id' => $one['file_id']
   ];
