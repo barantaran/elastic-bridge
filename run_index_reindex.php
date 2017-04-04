@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 require 'db.php';
 
+use Noodlehaus\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -9,8 +10,10 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('main.log', Logger::DEBUG));
 $log->debug('Reindex started');
 
+$conf = Config::load('config.yml');
+
 $hosts = [
-	'195.26.178.77:9200',          // IP + Port
+	$conf["host"] . ":" . $conf["port"] // IP + Port
 ];
 
 if(!isset($hosts) || count($hosts) < 1) die ("No hosts listed in \$hosts array!\n");
