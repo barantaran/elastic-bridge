@@ -22,8 +22,6 @@ $source = getSource($sql);
 
 foreach($source as $one)
 {
-  $body = json_decode($one["raw_data"],1);
-
   $params = [
     'index' => $conf["index"],
     'type' => 'image',
