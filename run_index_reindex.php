@@ -1,4 +1,10 @@
 <?php
+/**
+ * Init reindex procedure:
+ * 1. Remove item from elastic index.
+ * 2. Mark item as waiting for index.
+ * */
+
 require 'vendor/autoload.php';
 require 'header.php';
 
