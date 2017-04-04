@@ -22,9 +22,10 @@ $password = 'GjkmLbhfr2016MS';
 
 try {
     $dbh = new PDO($dsn, $user, $password);
-    echo "Connected to source!\n";
+    $log->debug('Connected to source!');
 } catch (PDOException $e) {
-    echo 'DB connection failed' . $e->getMessage();
+    $log->error('DB connection failed!');
+    $log->error($e->getMessage());
 }
 
 function getSource($sql)
