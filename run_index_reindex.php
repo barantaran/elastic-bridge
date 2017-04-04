@@ -1,22 +1,8 @@
 <?php
 require 'vendor/autoload.php';
-require 'db.php';
+require 'header.php';
 
-use Noodlehaus\Config;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-
-$log = new Logger('main');
-$log->pushHandler(new StreamHandler('main.log', Logger::DEBUG));
 $log->debug('Reindex started');
-
-$conf = Config::load('config.yml');
-
-$client = Elasticsearch\ClientBuilder::create()
-    ->setHosts([
-        $conf["host"] . ":" . $conf["port"] // IP + Port
-    ])
-	->build();
 
 /* 0 - waiting for index */
 /* 1 - indexed, active */
