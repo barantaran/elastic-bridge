@@ -6,7 +6,7 @@
  * */
 
 require 'vendor/autoload.php';
-require 'header.php';
+require 'header.inc.php';
 
 $log->debug('Reindex started');
 
