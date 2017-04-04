@@ -16,8 +16,6 @@ $hosts = [
 	$conf["host"] . ":" . $conf["port"] // IP + Port
 ];
 
-if(!isset($hosts) || count($hosts) < 1) die ("No hosts listed in \$hosts array!\n");
-
 $client = Elasticsearch\ClientBuilder::create()
 	->setHosts($hosts)
 	->build();
