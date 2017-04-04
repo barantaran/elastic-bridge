@@ -1,7 +1,8 @@
 {
     "name": "photobank/elastic-bridge",
     "require": {
-        "elasticsearch/elasticsearch": "^2.2"
+        "elasticsearch/elasticsearch": "^2.2",
+        "monolog/monolog": "^1.22"
     },
     "license": "MIT",
     "authors": [

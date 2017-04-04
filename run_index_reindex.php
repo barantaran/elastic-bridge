@@ -2,6 +2,13 @@
 require 'vendor/autoload.php';
 require 'db.php';
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+$log = new Logger('main');
+$log->pushHandler(new StreamHandler('main.log', Logger::DEBUG));
+$log->debug('Reindex started');
+
 $hosts = [
 	'195.26.178.77:9200',          // IP + Port
 ];
@@ -30,7 +37,7 @@ foreach($source as $one)
   $params = [
     'index' => $index,
     'type' => 'image',
-    'id' => $one['file_id'];
+    'id' => $one['file_id']
   ];
 
   $response = $client->delete($params);
