@@ -10,7 +10,6 @@ require 'vendor/autoload.php';
 require 'header.inc.php';
 
 $log->debug('Index started');
-$log->debug("Configured",$conf->all());
 
 /* 0 - waiting for index */
 /* 1 - indexed, active */

@@ -8,6 +8,8 @@ $log->pushHandler(new StreamHandler('main.log', Logger::DEBUG));
 
 $conf = Config::load('config.yml');
 
+$log->debug("Configured",$conf->all());
+
 $client = Elasticsearch\ClientBuilder::create()
     ->setHosts([
         $conf["host"] . ":" . $conf["port"] // IP + Port
