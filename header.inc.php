@@ -3,10 +3,10 @@ use Noodlehaus\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-$log = new Logger('main');
-$log->pushHandler(new StreamHandler('main.log', Logger::DEBUG));
-
 $conf = Config::load('config.yml');
+
+$log = new Logger('main');
+$log->pushHandler(new StreamHandler($conf["logFile"], Logger::DEBUG));
 
 $log->debug("Configured",$conf->all());
 
