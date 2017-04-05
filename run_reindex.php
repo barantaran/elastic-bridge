@@ -41,7 +41,7 @@ foreach($source as $one)
 
     if($response){
         $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
-        if($db->query($sql))
+        if($dbh->query($sql))
             $log->debug("Index status updated", $params);
         else
             $log->error("Index status update failed", $params);
