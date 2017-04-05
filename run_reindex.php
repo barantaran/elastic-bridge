@@ -30,8 +30,13 @@ foreach($source as $one)
 
   $response = $client->delete($params);
 
+  $log->debug("Elastic response", $response);
+
   if($response){
     $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
-    $db->query($sql);
+    if($db->query($sql))
+        $log->debug("Index status updated", $params);
+    else
+        $log->error("Index status update failed", $params);
   }
 }
