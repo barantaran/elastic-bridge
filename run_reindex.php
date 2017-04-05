@@ -23,27 +23,27 @@ $source = getSource($sql);
 foreach($source as $one)
 {
     $response = false;
-  $params = [
-    'index' => $conf["index"],
-    'type' => 'image',
-    'id' => $one['file_id']
-  ];
+    $params = [
+        'index' => $conf["index"],
+        'type' => 'image',
+        'id' => $one['file_id']
+    ];
 
-  $log->debug("Remove from elastic index", $params);
+    $log->debug("Remove from elastic index", $params);
 
-  try {
-      $response = $client->delete($params);
-      $log->debug("Elastic response", $response);
-  } catch (Exception $e) {
-      $log->warning("Can't delete item from index", [$e->getMessage()]);
-  }
+    try {
+        $response = $client->delete($params);
+        $log->debug("Elastic response", $response);
+    } catch (Exception $e) {
+        $log->warning("Can't delete item from index", [$e->getMessage()]);
+    }
 
 
-  if($response){
-    $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
-    if($db->query($sql))
-        $log->debug("Index status updated", $params);
-    else
-        $log->error("Index status update failed", $params);
-  }
+    if($response){
+        $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
+        if($db->query($sql))
+            $log->debug("Index status updated", $params);
+        else
+            $log->error("Index status update failed", $params);
+    }
 }
