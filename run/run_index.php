@@ -2,8 +2,9 @@
 /**
  * Init index procedure:
  * 1. Find items waiting for index.
- * 2. Push items into elastic index.
- * 3. Mark items as indexed.
+ * 2. Collect and format metadata.
+ * 3. Push items into elastic index.
+ * 4. Mark items as indexed.
  * */
 
 require __DIR__.'/../vendor/autoload.php';
