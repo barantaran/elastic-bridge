@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 require 'header.inc.php';
 
 $log->debug('Index started');
+$log->debug("Configured",$conf->all());
 
 /* 0 - waiting for index */
 /* 1 - indexed, active */
@@ -26,12 +27,20 @@ foreach($source as $one)
     $body = json_decode($one["raw_data"],1);
     $bodyFiltered = array();
 
+    $log->debug("Got raw data", $body);
+
     //Filter raw metadata according to configuration
-    foreach($conf["indexedFields"] as $field){
-        if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
+    if($body != null) {
+        foreach($conf["indexedFields"] as $field){
+            $log->debug("Filtering field $field");
+            if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
+            else $log->debug("Field $field not found");
+        }
+    } else {
+        $log->warning("raw_data is empty", $one);
     }
 
-    if(!isset($bodyFiltered)) continue;
+    $log->debug("Filtered raw data", $bodyFiltered);
 
     //Collect metadata stored at particular SQL columns but not in the raw_data.
     $sql = "SELECT * FROM file WHERE id =".$one['file_id'];
@@ -63,6 +72,8 @@ foreach($source as $one)
         'type' => 'image',
         'body' => $bodyFiltered
     ];
+
+    $log->debug("Goin to push into index", $params);
 
     $response = $client->index($params);
 
