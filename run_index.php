@@ -27,10 +27,9 @@ foreach($source as $one)
     $body = json_decode($one["raw_data"],1);
     $bodyFiltered = array();
 
-    $log->debug("Got raw data", $body);
-
     //Filter raw metadata according to configuration
     if($body != null) {
+        $log->debug("Got raw data", $body);
         foreach($conf["indexedFields"] as $field){
             $log->debug("Filtering field $field");
             if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
