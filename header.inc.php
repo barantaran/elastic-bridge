@@ -18,9 +18,9 @@ $client = Elasticsearch\ClientBuilder::create()
 
 $log->debug('Bridge opened');
 
-$dsn = 'mysql:dbname=photobank;host=172.17.0.2;charset=utf8';
-$user = 'photobank_user';
-$password = 'GjkmLbhfr2016MS';
+$dsn = 'mysql:dbname=somename;host=172.17.0.2;charset=utf8';
+$user = 'someuser';
+$password = 'somepass';
 
 try {
     $dbh = new PDO($dsn, $user, $password);
