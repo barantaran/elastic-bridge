@@ -1,5 +1,6 @@
 host: 195.26.178.77
 port: 9200
+logFile: main.log
 index: movies
 indexedFields:
     - Author
