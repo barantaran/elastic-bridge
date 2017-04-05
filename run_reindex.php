@@ -22,15 +22,22 @@ $source = getSource($sql);
 
 foreach($source as $one)
 {
+    $response = false;
   $params = [
     'index' => $conf["index"],
     'type' => 'image',
     'id' => $one['file_id']
   ];
 
-  $response = $client->delete($params);
+  $log->debug("Remove from elastic index", $params);
 
-  $log->debug("Elastic response", $response);
+  try {
+      $response = $client->delete($params);
+      $log->debug("Elastic response", $response);
+  } catch (Exception $e) {
+      $log->warning("Can't delete item from index", [$e->getMessage()]);
+  }
+
 
   if($response){
     $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
