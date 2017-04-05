@@ -87,3 +87,5 @@ foreach($source as $one)
             $log->error("Index status update failed", $params);
     }
 }
+
+$log->debug('Index finished');
