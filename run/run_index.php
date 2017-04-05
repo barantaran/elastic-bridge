@@ -6,8 +6,8 @@
  * 3. Mark items as indexed.
  * */
 
-require 'vendor/autoload.php';
-require 'header.inc.php';
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../inc/header.inc.php';
 
 $log->debug('Index started');
 

@@ -5,8 +5,8 @@
  * 2. Mark item as waiting for index.
  * */
 
-require 'vendor/autoload.php';
-require 'header.inc.php';
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../inc/header.inc.php';
 
 $log->debug('Reindex started');
 
@@ -37,7 +37,6 @@ foreach($source as $one)
     } catch (Exception $e) {
         $log->warning("Can't delete item from index", [$e->getMessage()]);
     }
-
 
     if($response){
         $sql = "UPDATE file SET ext_index_status = 0 WHERE id = " . $one['file_id'];
