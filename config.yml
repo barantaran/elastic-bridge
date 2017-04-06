@@ -7,3 +7,9 @@ indexedFields:
     - Source
     - SourceUrl
     - Title
+indexStatus:
+    - WAIT_FOR_IDX: 0
+    - INDEXED: 1
+    - WAIT_FOR_RMV: 2
+    - WAIT_FOR_UPD: 3
+    - REMOVED: 4
