@@ -12,7 +12,6 @@ require __DIR__.'/../inc/header.inc.php';
 
 $log->debug('Index started');
 
-/* -1 - waiting for index for the first time*/
 /* 0 - waiting for index */
 /* 1 - indexed, active */
 /* 2 - waiting for removal */
