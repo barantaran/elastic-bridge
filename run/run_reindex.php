@@ -36,10 +36,9 @@ foreach($source as $one)
         $response = $client->delete($params);
         $log->debug("Elastic response", $response);
     } catch (Exception $e) {
-        $log->warning("Can't delete item from index", [$e->getMessage()]);
-    }
-
-    if($response){
+        $elasticError = json_decode($e->getMessage(),1);
+        $log->warning("Can't delete item from index", [$elasticError]);
+    } finally {
         $sql = "UPDATE file SET ext_index_status = ".$conf["indexStatus"]["WAIT_FOR_IDX"]." WHERE id = " . $one['file_id'];
         if($dbh->query($sql))
             $log->debug("Index status updated", $params);
