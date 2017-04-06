@@ -12,13 +12,14 @@ require __DIR__.'/../inc/header.inc.php';
 
 $log->debug('Index started');
 
+/* -1 - waiting for index for the first time*/
 /* 0 - waiting for index */
 /* 1 - indexed, active */
 /* 2 - waiting for removal */
 /* 3 - waiting for reindex */
 /* 4 - removed, not active */
 
-$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = 0";
+$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status < 1";
 
 $source = getSource($sql);
 
