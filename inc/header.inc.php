@@ -3,7 +3,7 @@ use Noodlehaus\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-$conf = Config::load('config.yml');
+$conf = Config::load(__DIR__.'/../config.yml');
 
 $log = new Logger('main');
 $log->pushHandler(new StreamHandler($conf["logFile"], Logger::DEBUG));
