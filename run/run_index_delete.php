@@ -18,7 +18,7 @@ $client = Elasticsearch\ClientBuilder::create()
 /* 3 - waiting for reindex */
 /* 4 - removed, not active */
 
-$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = 2";
+$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = ".$conf["ST_WAIT_FOR_RMV"];
 
 $source = getSource($sql);
 $index = "movies";
@@ -33,10 +33,18 @@ foreach($source as $one)
     'id' => $one['file_id'];
   ];
 
+  $log->debug("Goin to push into index", $params);
+
   $response = $client->delete($params);
 
+  $log->debug("Elastic response", $response);
+
   if($response){
-    $sql = "UPDATE file SET ext_index_status = 4 WHERE id = " . $one['file_id'];
-    $db->query($sql);
+    $sql = "UPDATE file SET ext_index_status = ".$conf["ST_REMOVED"]." WHERE id = " . $one['file_id'];
+    $dbh->query($sql);
+    if($dbh->query($sql))
+        $log->debug("Index status updated", $params);
+    else
+        $log->error("Index status update failed", $params);
   }
 }
