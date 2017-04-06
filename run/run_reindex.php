@@ -17,7 +17,7 @@ $log->debug('Reindex started');
 /* 3 - waiting for reindex */
 /* 4 - removed, not active */
 
-$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = ".$conf["indexStatus"]["WAIT_FOR_UPD"];
+$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = ".$conf["ST_WAIT_FOR_UPD"];
 
 $source = getSource($sql);
 
@@ -39,7 +39,7 @@ foreach($source as $one)
         $elasticError = json_decode($e->getMessage(),1);
         $log->warning("Can't delete item from index", [$elasticError]);
     } finally {
-        $sql = "UPDATE file SET ext_index_status = ".$conf["indexStatus"]["WAIT_FOR_IDX"]." WHERE id = " . $one['file_id'];
+        $sql = "UPDATE file SET ext_index_status = ".$conf["ST_WAIT_FOR_IDX"]." WHERE id = " . $one['file_id'];
         if($dbh->query($sql))
             $log->debug("Index status updated", $params);
         else
