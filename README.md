@@ -1,11 +1,17 @@
 # elastic-bridge
 
-Install:
+Use composer to install dependecies:
 ```
 composer install --no-dev
 ```
 
-Run bridge container with docker:
+Setup crontab command:
+```
+* * * * * sh /<path-to-bridge>/run.sh >> /dev/null 2>&1
+```
+---
+
+Or run bridge container with docker:
 ```
 $ docker run -d -p 80:80 --link elasticsearch --link photobank-db --name elastic-bridge -v "$PWD":/var/www/html php:7.0-apache
 ```
@@ -14,15 +20,16 @@ Enter container:
 ```
 docker exec -i -t elastic-bridge /bin/bash
 ```
-
+Install [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) then install dependencies:
+```
+composer install --no-dev
+```
 Then run bridge manually:
 ```
-$php run/run_reindex.php
-$php run/run_index.php
+sh /var/www/html/run.sh
 ```
 
 Or setup crontab command:
 ```
-*/2 * * * * docker exec elastic-bridge /usr/bin/php /var/www/html/run/run_reindex.php >> /dev/null 2>&1
-1-59/2 * * * * docker exec elastic-bridge /usr/bin/php /var/www/html/run/run_index.php >> /dev/null 2>&1
+* * * * * docker exec elastic-bridge sh /var/www/html/run.sh >> /dev/null 2>&1
 ```
