@@ -17,12 +17,10 @@ docker exec -i -t elastic-bridge /bin/bash
 
 Then run bridge manually:
 ```
-$php run/run_reindex.php
-$php run/run_index.php
+sh /var/www/html/run.sh
 ```
 
 Or setup crontab command:
 ```
-*/2 * * * * docker exec elastic-bridge /usr/bin/php /var/www/html/run/run_reindex.php >> /dev/null 2>&1
-1-59/2 * * * * docker exec elastic-bridge /usr/bin/php /var/www/html/run/run_index.php >> /dev/null 2>&1
+* * * * * docker exec elastic-bridge sh /var/www/html/run.sh >> /dev/null 2>&1
 ```
