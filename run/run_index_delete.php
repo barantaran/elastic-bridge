@@ -14,7 +14,7 @@ $log->debug('Index delete started');
 /* 3 - waiting for reindex */
 /* 4 - removed, not active */
 
-$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 1 AND ext_index_status = ".$conf["ST_WAIT_FOR_RMV"];
+$sql = "SELECT * FROM plugin_imageviewer_meta JOIN file ON file_id = file.id WHERE statusId = 2 AND ext_index_status = ".$conf["ST_WAIT_FOR_RMV"];
 
 $source = getSource($sql);
 $index = "movies";
