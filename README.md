@@ -9,6 +9,7 @@ Setup crontab command:
 ```
 * * * * * sh /var/www/html/run.sh >> /dev/null 2>&1
 ```
+---
 
 Or run bridge container with docker:
 ```
