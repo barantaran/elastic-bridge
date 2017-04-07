@@ -7,7 +7,7 @@ composer install --no-dev
 
 Setup crontab command:
 ```
-* * * * * sh /var/www/html/run.sh >> /dev/null 2>&1
+* * * * * sh /<path-to-bridge>/run.sh >> /dev/null 2>&1
 ```
 ---
 
