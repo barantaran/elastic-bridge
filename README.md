@@ -20,7 +20,7 @@ Enter container:
 ```
 docker exec -i -t elastic-bridge /bin/bash
 ```
-Then install dependencies:
+Install [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) then install dependencies:
 ```
 composer install --no-dev
 ```
