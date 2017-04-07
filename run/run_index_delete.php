@@ -1,16 +1,12 @@
 <?php
-require 'vendor/autoload.php';
-require 'db.php';
+/**
+ * Delete item from elastic index:
+ * */
 
-$hosts = [
-	'195.26.178.77:9200',          // IP + Port
-];
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../inc/header.inc.php';
 
-if(!isset($hosts) || count($hosts) < 1) die ("No hosts listed in \$hosts array!\n");
-
-$client = Elasticsearch\ClientBuilder::create()
-	->setHosts($hosts)
-	->build();
+$log->debug('Index delete started');
 
 /* 0 - waiting for index */
 /* 1 - indexed, active */
@@ -30,7 +26,7 @@ foreach($source as $one)
   $params = [
     'index' => $index,
     'type' => 'image',
-    'id' => $one['file_id'];
+    'id' => $one['file_id']
   ];
 
   $log->debug("Goin to push into index", $params);
@@ -48,3 +44,5 @@ foreach($source as $one)
         $log->error("Index status update failed", $params);
   }
 }
+
+$log->debug('Index delete finished');
