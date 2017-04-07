@@ -1,0 +1,14 @@
+host: 195.26.178.77
+port: 9200
+logFile: main.log
+index: movies
+indexedFields:
+    - Author
+    - Source
+    - SourceUrl
+    - Title
+ST_WAIT_FOR_IDX: 0
+ST_INDEXED: 1
+ST_WAIT_FOR_RMV: 2
+ST_WAIT_FOR_UPD: 3
+ST_REMOVED: 4

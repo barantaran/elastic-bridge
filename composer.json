@@ -1,7 +1,10 @@
 {
     "name": "photobank/elastic-bridge",
     "require": {
-        "elasticsearch/elasticsearch": "^2.2"
+        "elasticsearch/elasticsearch": "^2.2",
+        "monolog/monolog": "^1.22",
+        "hassankhan/config": "^0.10.0",
+        "symfony/yaml": "^3.2"
     },
     "license": "MIT",
     "authors": [
