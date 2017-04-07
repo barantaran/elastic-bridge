@@ -8,7 +8,7 @@
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/../inc/header.inc.php';
 
-$log->debug('Reindex started');
+$log->debug('Index update started');
 
 /* 0 - waiting for index */
 /* 1 - indexed, active */
