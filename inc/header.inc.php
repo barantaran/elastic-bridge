@@ -18,12 +18,10 @@ $client = Elasticsearch\ClientBuilder::create()
 
 $log->debug('Bridge opened');
 
-$dsn = 'mysql:dbname=somename;host=172.17.0.2;charset=utf8';
-$user = 'someuser';
-$password = 'somepass';
+$dsn = 'mysql:dbname='.$conf["dbName"].';host='.$conf["dbHost"].';charset=utf8';
 
 try {
-    $dbh = new PDO($dsn, $user, $password);
+    $dbh = new PDO($dsn, $conf["dbUser"], $conf["dbPass"]);
     $log->debug('Connected to source!');
 } catch (PDOException $e) {
     $log->error('DB connection failed!');
