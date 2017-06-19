@@ -32,7 +32,19 @@ foreach($source as $one)
         $log->debug("Got raw data", $body);
         foreach($conf["indexedFields"] as $field){
             $log->debug("Filtering field $field");
-            if(array_key_exists($field,$body)) $bodyFiltered[mb_strtolower($field)] = $body[$field];
+            if(array_key_exists($field,$body)){
+              if($field == 'Author'){
+                if($body['Creator'] !== ''){
+                  $bodyFiltered[mb_strtolower($field)] = $body['Creator'];
+                }
+                else if($body['Author'] !== ''){
+                  $bodyFiltered[mb_strtolower($field)] = $body['Author'];
+                }
+                else{
+                  $bodyFiltered[mb_strtolower($field)] = 'Автор не известен';
+                }
+              } 
+            }
             else $log->debug("Field $field not found");
         }
     } else {
