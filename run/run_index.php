@@ -35,19 +35,16 @@ foreach($source as $one)
             $addedFlag = false;
             if(array_key_exists($field,$body)){        
               if(!empty($conf["indexedAlias"][$field])){
-                $counter = 0;
-                $arrayCount = count($conf["indexedAlias"][$field]);
                 foreach($conf["indexedAlias"][$field] as $one){
                   if($body[$one] !== ''){
                     $bodyFiltered[mb_strtolower($field)] = $body[$one];
                     $addedFlag = true;
                     break;
                   }
-                  $counter++;
-                  if($arrayCount == $counter){
-                    $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$one][0];
-                    $addedFlag = true;
-                  }
+                }
+                if(!$addedFlag){
+                  $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$field][0];
+                  $addedFlag = true;
                 }
                }
                if(!$addedFlag){
