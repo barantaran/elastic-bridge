@@ -7,6 +7,13 @@ indexedFields:
     - Source
     - SourceUrl
     - Title
+indexedAlias:
+    Author:
+      - Creator
+      - Author
+indexedAliasNotFound:
+    Author:
+      - Автор не известен
 ST_WAIT_FOR_IDX: 0
 ST_INDEXED: 1
 ST_WAIT_FOR_RMV: 2

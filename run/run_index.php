@@ -32,17 +32,27 @@ foreach($source as $one)
         $log->debug("Got raw data", $body);
         foreach($conf["indexedFields"] as $field){
             $log->debug("Filtering field $field");
-            if(array_key_exists($field,$body)){
-              if($field == 'Author'){
-                if($body['Creator'] !== ''){
-                  $bodyFiltered[mb_strtolower($field)] = $body['Creator'];
+            $addedFlag = false;
+            if(array_key_exists($field,$body)){        
+              if(!empty($conf["indexedAlias"][$field])){
+                $counter = 0;
+                $arrayCount = count($conf["indexedAlias"][$field]);
+                foreach($conf["indexedAlias"][$field] as $one){
+                  if($body[$one] !== ''){
+                    $bodyFiltered[mb_strtolower($field)] = $body[$one];
+                    $addedFlag = true;
+                    break;
+                  }
+                  $counter++;
+                  if($arrayCount == $counter){
+                    $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$one][0];
+                    $addedFlag = true;
+                  }
                 }
-                else if($body['Author'] !== ''){
-                  $bodyFiltered[mb_strtolower($field)] = $body['Author'];
-                }
-                else{
-                  $bodyFiltered[mb_strtolower($field)] = 'Автор не известен';
-                }
+               }
+               if(!$addedFlag){
+                $bodyFiltered[mb_strtolower($field)] = $body[$field];
+               }
               } 
             }
             else $log->debug("Field $field not found");
