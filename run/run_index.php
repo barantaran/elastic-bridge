@@ -32,28 +32,22 @@ foreach($source as $one)
         $log->debug("Got raw data", $body);
         foreach($conf["indexedFields"] as $field){
             $log->debug("Filtering field $field");
-            $addedFlag = false;
-            if(array_key_exists($field,$body)){        
-              if(!empty($conf["indexedAlias"][$field])){
-                foreach($conf["indexedAlias"][$field] as $one){
-                  if($body[$one] !== ''){
-                    $bodyFiltered[mb_strtolower($field)] = $body[$one];
-                    $addedFlag = true;
-                    break;
-                  }
+            if(array_key_exists($field,$body)){
+              $bodyFiltered[mb_strtolower($field)] = $body[$field];
+            } else {
+              $log->debug("Field $field not found");
+            }  
+            if(!empty($conf["indexedAlias"][$field])){
+              $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$field][0];
+              foreach($conf["indexedAlias"][$field] as $one){
+                if(array_key_exists($one,$body) && $body[$one] != ''){
+                  $bodyFiltered[mb_strtolower($field)] = $body[$one];
+                  $log->debug("Field $field alias $one found");
+                  break;
                 }
-                if(!$addedFlag){
-                  $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$field][0];
-                  $addedFlag = true;
-                }
-               }
-               if(!$addedFlag){
-                $bodyFiltered[mb_strtolower($field)] = $body[$field];
-               }
-              } 
+              }
+             } 
             }
-            else $log->debug("Field $field not found");
-        }
     } else {
         $log->warning("raw_data is empty", $one);
     }
