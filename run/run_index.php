@@ -39,15 +39,15 @@ foreach($source as $one)
             }  
             if(!empty($conf["indexedAlias"][$field])){
               $bodyFiltered[mb_strtolower($field)] = $conf["indexedAliasNotFound"][$field][0];
-              foreach($conf["indexedAlias"][$field] as $one){
-                if(array_key_exists($one,$body) && $body[$one] != ''){
-                  $bodyFiltered[mb_strtolower($field)] = $body[$one];
-                  $log->debug("Field $field alias $one found");
+              foreach($conf["indexedAlias"][$field] as $oneIn){
+                if(array_key_exists($oneIn,$body) && $body[$oneIn] != ''){
+                  $bodyFiltered[mb_strtolower($field)] = $body[$oneIn];
+                  $log->debug("Field $field alias $oneIn found");
                   break;
                 }
               }
              } 
-            }
+          }
     } else {
         $log->warning("raw_data is empty", $one);
     }
