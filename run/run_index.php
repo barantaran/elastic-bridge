@@ -47,7 +47,7 @@ foreach($source as $one)
                 }
               }
              } 
-          }
+            }
     } else {
         $log->warning("raw_data is empty", $one);
     }
