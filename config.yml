@@ -9,6 +9,13 @@ indexedFields:
     - Source
     - SourceUrl
     - Title
+indexedAlias:
+    Author:
+      - Creator
+      - Author
+indexedAliasNotFound:
+    Author:
+      - Автор не известен
 dbHost:
 dbName:
 dbUser:
