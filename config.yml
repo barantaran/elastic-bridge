@@ -2,6 +2,8 @@ host: 195.26.178.77
 port: 9200
 logFile: main.log
 index: movies
+types:
+    - image
 indexedFields:
     - Author
     - Source
@@ -14,6 +16,10 @@ indexedAlias:
 indexedAliasNotFound:
     Author:
       - Автор не известен
+dbHost:
+dbName:
+dbUser:
+dbPass:
 ST_WAIT_FOR_IDX: 0
 ST_INDEXED: 1
 ST_WAIT_FOR_RMV: 2
