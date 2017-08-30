@@ -13,6 +13,7 @@ indexedAlias:
     Author:
       - Creator
       - Author
+      - SourceText
 indexedAliasNotFound:
     Author:
       - Автор не известен
