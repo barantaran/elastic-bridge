@@ -67,6 +67,7 @@ foreach($source as $one)
     $bodyFiltered["poster"] = "https://photo.mir24.tv/core/cache/plugins/imageviewer/".$fileSource['id']."/".$fileSource['unique_hash']."/585x440_cropped.jpg";
 
     $bodyFiltered["date_taken"] = date("d/m/Y", strtotime($one["date_taken"]));
+    $bodyFiltered["datecreated"] = date("d/m/Y", strtotime($body["DateCreated"]));
 
     if($one["width"] > $one["height"] ){
         $bodyFiltered["horizontal"] = 1;
