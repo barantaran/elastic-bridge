@@ -2,11 +2,21 @@ host: 195.26.178.77
 port: 9200
 logFile: main.log
 index: movies
+types:
+    - image
 indexedFields:
     - Author
     - Source
     - SourceUrl
     - Title
+indexedAlias:
+    Author:
+      - Creator
+      - Author
+      - SourceText
+indexedAliasNotFound:
+    Author:
+      - Автор не известен
 dbHost:
 dbName:
 dbUser:
