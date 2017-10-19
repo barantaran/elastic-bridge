@@ -31,9 +31,16 @@ foreach($source as $one)
 
   $log->debug("Goin to push into index", $params);
 
-  $response = $client->delete($params);
-
-  $log->debug("Elastic response", $response);
+  try {
+    $response = $client->delete($params);
+    $log->debug("Elastic response", $response);
+  }
+  catch(Exception $e)
+  {
+    $log->error("Elastic resturns", [$e]);
+    $log->error("Index status update failed", $params);
+    continue;
+  }
 
   if($response){
     $sql = "UPDATE file SET ext_index_status = ".$conf["ST_REMOVED"]." WHERE id = " . $one['file_id'];
