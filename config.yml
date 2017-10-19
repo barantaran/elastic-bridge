@@ -14,6 +14,12 @@ indexedAlias:
 indexedAliasNotFound:
     Author:
       - Автор не известен
+
+dbHost:
+dbName:
+dbUser:
+dbPass:
+
 ST_WAIT_FOR_IDX: 0
 ST_INDEXED: 1
 ST_WAIT_FOR_RMV: 2
